@@ -5,9 +5,8 @@
         Add,
         Remove
     }
-    public class ResourcePostcondition : BasePostcondition
+    public class ResourcePostcondition<T> : BasePostcondition where T : BaseResource
     {
-        public BaseResource Resource;
         public float Amount;
         public Change ChangeOperation;
 
@@ -15,8 +14,7 @@
 
         public override void Apply()
         {
-            _agent.ModifyResource<>
-            agentResource.Value = ChangeOperation == Change.Add ? agentResource.Value + Amount : agentResource.Value - Amount;
+            _agent.ModifyResource<T>(Amount);
         }
     }
 }

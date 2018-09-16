@@ -9,9 +9,9 @@ namespace GOAP
         private Dictionary<BaseResource, float> _resources = new Dictionary<BaseResource, float>();
         private List<IAction> _availableActions = new List<IAction>();
 
-        public BaseResource GetResource<T>()
+        public float GetResource<T>()
         {
-            return _resources.FirstOrDefault(r => r.Key is T).Key;
+            return _resources.FirstOrDefault(r => r.Key is T).Value;
         }
 
         public void ModifyResource<T>(float amount)

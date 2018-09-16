@@ -9,10 +9,8 @@ namespace GOAP
         MoreOrEqual,
         More
     }
-    public class ResourcePrecondition : BasePrecondition
+    public class ResourcePrecondition<T> : BasePrecondition where T : BaseResource
     {
-        public string ResourceTag;
-        public BaseResource Resource;
         public Comparison Comparison;
         public float Value;
 
@@ -20,21 +18,19 @@ namespace GOAP
 
         public override bool IsMet()
         {
-            var agentResource = _agent.GetResource(ResourceTag);
-            if (!agentResource)
-                return false;
+            var agentResource = _agent.GetResource<T>();
             switch (Comparison)
             {
                 case Comparison.Less:
-                    return agentResource.Value < Value;
+                    return agentResource < Value;
                 case Comparison.LessOrEqual:
-                    return agentResource.Value < Value || agentResource.Value.Equals(Value);
+                    return agentResource < Value || agentResource.Equals(Value);
                 case Comparison.Equal:
-                    return agentResource.Value.Equals(Value);
+                    return agentResource.Equals(Value);
                 case Comparison.MoreOrEqual:
-                    return agentResource.Value > Value || agentResource.Value.Equals(Value);
+                    return agentResource > Value || agentResource.Equals(Value);
                 case Comparison.More:
-                    return agentResource.Value > Value;
+                    return agentResource > Value;
             }
             return false;
         }
