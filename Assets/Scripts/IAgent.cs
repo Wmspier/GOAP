@@ -3,8 +3,8 @@ namespace GOAP
 {
     public interface IAgent
     {
-        float GetResource<T>();
-        void ModifyResource<T>(float amount);
+        float GetResource(Type resourceType);
+        void ModifyResource(Type resourceType, float amount);
         bool HasState(string name);
     }
 }

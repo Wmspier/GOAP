@@ -13,8 +13,8 @@ namespace GOAP
     [CreateAssetMenu(fileName = "NewAction", menuName = "GOAP/Action", order = 1)]
     public class BaseAction : ScriptableObject, IAction
     {
-        public List<IPrecondition> Preconditions;
-        public List<IPostcondition> Postconditions;
+        public List<BasePrecondition> Preconditions;
+        public List<BasePostcondition> Postconditions;
         public Difficulty Difficulty;
         public ISubject Subject;
 

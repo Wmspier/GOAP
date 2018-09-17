@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine;
 namespace GOAP
 {
     public enum Comparison
@@ -9,8 +9,11 @@ namespace GOAP
         MoreOrEqual,
         More
     }
-    public class ResourcePrecondition<T> : BasePrecondition where T : BaseResource
+
+    [CreateAssetMenu(fileName = "ResourcePrecondition", menuName = "GOAP/Resource Precondition", order = 3)]
+    public class ResourcePrecondition : BasePrecondition
     {
+        public BaseResource Resource;
         public Comparison Comparison;
         public float Value;
 
@@ -18,7 +21,7 @@ namespace GOAP
 
         public override bool IsMet()
         {
-            var agentResource = _agent.GetResource<T>();
+            var agentResource = _agent.GetResource(Resource.GetType());
             switch (Comparison)
             {
                 case Comparison.Less:

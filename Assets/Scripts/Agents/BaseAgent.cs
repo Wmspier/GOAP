@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 namespace GOAP
 {
@@ -9,14 +10,14 @@ namespace GOAP
         private Dictionary<BaseResource, float> _resources = new Dictionary<BaseResource, float>();
         private List<IAction> _availableActions = new List<IAction>();
 
-        public float GetResource<T>()
+        public float GetResource(Type resourceType)
         {
-            return _resources.FirstOrDefault(r => r.Key is T).Value;
+            return _resources.FirstOrDefault(r => r.Key.GetType() == resourceType).Value;
         }
 
-        public void ModifyResource<T>(float amount)
+        public void ModifyResource(Type resourceType, float amount)
         {
-            var resource = _resources.FirstOrDefault(r => r.Key is T).Key;
+            var resource = _resources.FirstOrDefault(r => r.Key.GetType() == resourceType).Key;
             if (resource)
                 _resources[resource] += amount;
             else

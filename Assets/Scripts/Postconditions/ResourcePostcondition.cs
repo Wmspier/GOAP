@@ -1,12 +1,16 @@
-﻿namespace GOAP
+﻿using UnityEngine;
+namespace GOAP
 {
     public enum Change
     {
         Add,
         Remove
     }
-    public class ResourcePostcondition<T> : BasePostcondition where T : BaseResource
+
+    [CreateAssetMenu(fileName = "ResourcePostcondition", menuName = "GOAP/Resource Postcondition", order = 3)]
+    public class ResourcePostcondition : BasePostcondition
     {
+        public BaseResource Resource;
         public float Amount;
         public Change ChangeOperation;
 
@@ -14,7 +18,7 @@
 
         public override void Apply()
         {
-            _agent.ModifyResource<T>(Amount);
+            _agent.ModifyResource(Resource.GetType(), Amount);
         }
     }
 }
