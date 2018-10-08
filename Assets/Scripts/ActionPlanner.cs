@@ -3,7 +3,7 @@ namespace GOAP
 {
     public static class ActionPlanner
     {
-        public static Stack<IAction> ConstructActionPlan(Goal goal)
+        public static Stack<IAction> ConstructActionPlan(Actor actor, Goal goal, List<BaseAction> performableActions)
         {
             return new Stack<IAction>();
         }

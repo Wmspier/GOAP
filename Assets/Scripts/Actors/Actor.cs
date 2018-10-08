@@ -56,7 +56,17 @@ namespace GOAP
         private void PlanActions()
         {
             _actions.Clear();
-            _actions = ActionPlanner.ConstructActionPlan(Goal);
+            var worldActions = GetWorldActions();
+            _actions = ActionPlanner.ConstructActionPlan(this, Goal, worldActions);
+        }
+
+        private List<BaseAction> GetWorldActions()
+        {
+            var allActions = new List<BaseAction>();
+            //  Get objects of Type SUBJECT
+            //  Get their ALLOWABLE actions
+
+            return allActions;
         }
     }
 }
