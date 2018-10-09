@@ -26,7 +26,8 @@ namespace GOAP
             if(!success)
             {
                 //  Plan was not created -- sad.
-                return null;
+                UnityEngine.Debug.Log("Plan failed");
+                return new Stack<IAction>();
             }
 
             PlannerNode cheapest = null;
@@ -56,6 +57,14 @@ namespace GOAP
                 }
                 n = n.Parent;
             }
+
+            //Debug
+            var debugString = "I made a plan! ";
+            foreach(var action in actionPlan)
+            {
+                debugString += action.GetType() + " - ";
+            }
+            UnityEngine.Debug.Log(debugString);
 
             return actionPlan;
         }

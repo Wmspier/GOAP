@@ -10,7 +10,7 @@ namespace GOAP
         More
     }
 
-    [CreateAssetMenu(fileName = "ResourcePrecondition", menuName = "GOAP/Precondition/Resource Precondition", order = 0)]
+    [CreateAssetMenu(fileName = "ResourceCondition", menuName = "GOAP/Condition/Resource Condition", order = 0)]
     public class ResourceCondition : BaseCondition
     {
         public BaseResource Resource;
@@ -19,7 +19,7 @@ namespace GOAP
 
         public override bool IsMet(Actor actor)
         {
-            var agentResource = actor.GetResource(Resource.GetType());
+            var agentResource = actor.GetResource(Resource.Name);
             switch (Comparison)
             {
                 case Comparison.Less:

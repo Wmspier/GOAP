@@ -6,8 +6,13 @@ namespace GOAP
     {
         public Goal Goal;
 
-        private Stack<IAction> _actions = new Stack<IAction>();
+        private Stack<IAction> _actions;
         private IAction _currentAction;
+
+        private void Awake()
+        {
+            _actions = new Stack<IAction>();
+        }
 
         public void Update()
         {

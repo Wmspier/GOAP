@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace GOAP
 {
-    [CreateAssetMenu(fileName = "StatePrecondition", menuName = "GOAP/Precondition/State Precondition", order = 1)]
+    [CreateAssetMenu(fileName = "StateCondition", menuName = "GOAP/Condition/State Condition", order = 1)]
     public class StateCondition : BaseCondition
     {
         public State State;

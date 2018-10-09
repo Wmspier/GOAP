@@ -9,6 +9,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a88c54f76698b4e4c8cac83bbee6d8fb, type: 3}
-  m_Name: Carrots
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  Name: Carrots
+  Name: Wood

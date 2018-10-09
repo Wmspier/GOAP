@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 namespace GOAP
 {
     public enum Difficulty
@@ -11,6 +12,7 @@ namespace GOAP
         Hard
     }
 
+    [Serializable]
     [CreateAssetMenu(fileName = "NewAction", menuName = "GOAP/Action", order = 1)]
     public class BaseAction : ScriptableObject, IAction
     {

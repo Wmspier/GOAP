@@ -3,8 +3,8 @@ namespace GOAP
 {
     public interface ISubject
     {
-        float GetResource(Type resourceType);
-        void ModifyResource(Type resourceType, float amount);
+        float GetResource(string resourceType);
+        void ModifyResource(string resourceType, float amount);
         bool HasState(State state);
         void ModifyState(State state, StateChange stateChange);
     }

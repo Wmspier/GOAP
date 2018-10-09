@@ -8,7 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf88ef8118b224787a60d73e1f1074d1, type: 3}
-  m_Name: Fed
+  m_Script: {fileID: 11500000, guid: a097243a429d24c3c9991978440ce120, type: 3}
+  m_Name: GetWood
   m_EditorClassIdentifier: 
-  Name: Fed
+  Resource: {fileID: 11400000, guid: 05ee59bcaca8a48d5b6983221f2926c4, type: 2}
+  Amount: 10
+  ChangeOperation: 0

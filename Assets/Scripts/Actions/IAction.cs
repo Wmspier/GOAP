@@ -1,4 +1,5 @@
-﻿namespace GOAP
+﻿using System;
+namespace GOAP
 {
     public interface IAction
     {

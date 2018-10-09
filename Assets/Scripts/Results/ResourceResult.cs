@@ -7,7 +7,7 @@ namespace GOAP
         Remove
     }
 
-    [CreateAssetMenu(fileName = "ResourcePostcondition", menuName = "GOAP/Postcondition/Resource Postcondition", order = 1)]
+    [CreateAssetMenu(fileName = "ResourceResult", menuName = "GOAP/Result/Resource Result", order = 1)]
     public class ResourceResult : BaseResult
     {
         public BaseResource Resource;
@@ -18,7 +18,7 @@ namespace GOAP
         {
             //  TODO aherrera : reevaulate and see if it meets SubjectData structure -- see IResult
 
-            actor.ModifyResource(Resource.GetType(), Amount);
+            actor.ModifyResource(Resource.Name, Amount);
         }
     }
 }

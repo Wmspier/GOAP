@@ -6,7 +6,7 @@ namespace GOAP
         Lose,
         Gain
     }
-    [CreateAssetMenu(fileName = "StatePostcondition", menuName = "GOAP/Postcondition/State Postcondition", order = 0)]
+    [CreateAssetMenu(fileName = "StateResult", menuName = "GOAP/Result/State Result", order = 0)]
     public class StateResult : BaseResult
     {
         public State State;
