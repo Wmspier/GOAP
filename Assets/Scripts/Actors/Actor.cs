@@ -6,12 +6,12 @@ namespace GOAP
     {
         public Goal Goal;
 
-        private Stack<IAction> _actions;
-        private IAction _currentAction;
+        private Stack<BaseAction> _actions;
+        private BaseAction _currentAction;
 
         private void Awake()
         {
-            _actions = new Stack<IAction>();
+            _actions = new Stack<BaseAction>();
         }
 
         public void Update()
@@ -36,7 +36,7 @@ namespace GOAP
             var topAction = _actions.Peek();
             if(topAction != _currentAction)
             {
-                if(topAction.Enter() == false)
+                if(topAction.Enter(this) == false)
                 {
                     PlanActions();
                 }
@@ -44,7 +44,7 @@ namespace GOAP
             }
             else
             {
-                if(_currentAction.Perform() == false)
+                if(_currentAction.Perform(this) == false)
                 {
                     PlanActions();
                 }
@@ -52,7 +52,7 @@ namespace GOAP
 
             if(_currentAction.IsComplete())
             {
-                _currentAction.Exit();
+                _currentAction.Exit(this);
                 _currentAction = null;
                 _actions.Pop();
             }
@@ -67,7 +67,18 @@ namespace GOAP
 
         private List<BaseAction> GetWorldActions()
         {
+            var subjects = FindObjectsOfType<BaseSubject>();
             var allActions = new List<BaseAction>();
+            foreach(var subject in subjects)
+            {
+                foreach(var allowabledAction in subject.AllowableActions)
+                {
+                    if(!allActions.Contains(allowabledAction))
+                    {
+                        allActions.Add(allowabledAction);
+                    }
+                }
+            }
             //  Get objects of Type SUBJECT
             //  Get their ALLOWABLE actions
 

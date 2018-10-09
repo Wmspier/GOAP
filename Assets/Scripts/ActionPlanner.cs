@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 namespace GOAP
 {
     public static class ActionPlanner
@@ -12,7 +13,7 @@ namespace GOAP
             public BaseAction Action;
         }
 
-        public static Stack<IAction> ConstructActionPlan(Actor actor, Goal goal, List<BaseAction> performableActions)
+        public static Stack<BaseAction> ConstructActionPlan(Actor actor, Goal goal, List<BaseAction> performableActions)
         {
             List<PlannerNode> treeGraph = new List<PlannerNode>();
 
@@ -27,7 +28,7 @@ namespace GOAP
             {
                 //  Plan was not created -- sad.
                 UnityEngine.Debug.Log("Plan failed");
-                return new Stack<IAction>();
+                return new Stack<BaseAction>();
             }
 
             PlannerNode cheapest = null;
@@ -47,7 +48,7 @@ namespace GOAP
             }
 
             //  Get the cheapest node and work back through parents to construct action plan
-            Stack<IAction> actionPlan = new Stack<IAction>();
+            var actionPlan = new Stack<BaseAction>();
             PlannerNode n = cheapest;
             while(n != null)
             {
@@ -62,7 +63,7 @@ namespace GOAP
             var debugString = "I made a plan! ";
             foreach(var action in actionPlan)
             {
-                debugString += action.GetType() + " - ";
+                debugString += action.name + " - ";
             }
             UnityEngine.Debug.Log(debugString);
 

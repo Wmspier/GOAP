@@ -19,15 +19,13 @@ namespace GOAP
         public List<BaseCondition> Conditions = new List<BaseCondition>();
         public List<BaseResult> Results = new List<BaseResult>();
         public Difficulty Difficulty;
-        public BaseSubject Subject;
-        public Actor Actor;
 
-        public virtual bool Enter()
+        public virtual bool Enter(Actor actor)
         {
-            return !Conditions.Any(c => !c.IsMet(Actor));
+            return !Conditions.Any(c => !c.IsMet(actor));
         }
-        public virtual void Exit(){}
-        public virtual bool Perform()
+        public virtual void Exit(Actor actor){}
+        public virtual bool Perform(Actor actor)
         {
             return true;
         }
