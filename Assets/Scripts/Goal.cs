@@ -5,7 +5,7 @@ namespace GOAP
 {
     public class Goal : ScriptableObject
     {
-        public List<ICondition> DesiredConditions = new List<ICondition>();
+        public List<BaseCondition> DesiredConditions = new List<BaseCondition>();
 
         public bool IsFullfilled(Actor actor)
         {

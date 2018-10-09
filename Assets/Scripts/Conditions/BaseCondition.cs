@@ -5,7 +5,13 @@ namespace GOAP
     {
         public virtual bool IsMet(Actor actor)
         {
+            return IsMet(actor.Data);
+        }
+
+        public virtual bool IsMet(SubjectData data)
+        {
             return true;
         }
+
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ICondition
     {
-        bool IsMet(Actor actor);
+        bool IsMet(SubjectData data);
     }
 }

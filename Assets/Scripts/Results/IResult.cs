@@ -2,6 +2,7 @@
 {
     public interface IResult
     {
-        void Apply(Actor actor, BaseSubject subject);
+     //   void Apply(ref Actor actor, ref BaseSubject subject);
+        void Apply(ref SubjectData actorData, ref SubjectData subjectData);
     }
 }
