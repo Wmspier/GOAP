@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 namespace GOAP
 {
     public enum StateChange
@@ -11,6 +13,16 @@ namespace GOAP
     {
         public State State;
         public StateChange StateChange;
+
+        public override void Apply(ref SubjectData actorData, ref SubjectData subjectData)
+        {
+            if (StateChange == StateChange.Gain && actorData.States.FirstOrDefault(s => s.GetType() == State.GetType()) == null)
+                actorData.States.Add(State);
+            else if (StateChange == StateChange.Lose)
+            {
+                actorData.States.Remove(actorData.States.FirstOrDefault(s => s.GetType() == State.GetType()));
+            }
+        }
 
         public override void Apply(ref Actor actor, ref BaseSubject subject)
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 namespace GOAP
 {
     public enum Change
@@ -19,6 +20,14 @@ namespace GOAP
             //  TODO aherrera : reevaulate and see if it meets SubjectData structure -- see IResult
 
             actor.ModifyResource(Resource.Name, Amount);
+        }
+
+        public override void Apply(ref SubjectData actorData, ref SubjectData subjectData)
+        {
+            if(actorData.Resources.ContainsKey(Resource.Name))
+                actorData.Resources[Resource.Name] += Amount;
+            else
+                actorData.Resources.Add(Resource.Name, Amount);
         }
     }
 }

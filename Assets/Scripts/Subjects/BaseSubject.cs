@@ -33,6 +33,7 @@ namespace GOAP
             return resource.Value;
         }
 
+        //  TODO aherrera : This is copied in ResourceResult.Apply(..) -- only one should remain.
         public void ModifyResource(string resourceType, float amount)
         {
             if (Data.Resources.ContainsKey(resourceType))
