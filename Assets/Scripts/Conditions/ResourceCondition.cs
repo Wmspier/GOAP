@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 namespace GOAP
 {
     public enum Comparison
@@ -20,6 +21,25 @@ namespace GOAP
         public override bool IsMet(Actor actor)
         {
             var agentResource = actor.GetResource(Resource.Name);
+            switch (Comparison)
+            {
+                case Comparison.Less:
+                    return agentResource < Value;
+                case Comparison.LessOrEqual:
+                    return agentResource < Value || agentResource.Equals(Value);
+                case Comparison.Equal:
+                    return agentResource.Equals(Value);
+                case Comparison.MoreOrEqual:
+                    return agentResource > Value || agentResource.Equals(Value);
+                case Comparison.More:
+                    return agentResource > Value;
+            }
+            return false;
+        }
+
+        public override bool IsMet(SubjectData data)
+        {
+            var agentResource = data.Resources.FirstOrDefault(r => r.Key == Resource.Name).Value;
             switch (Comparison)
             {
                 case Comparison.Less:

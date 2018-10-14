@@ -24,7 +24,16 @@ namespace GOAP
         {
             return !Conditions.Any(c => !c.IsMet(actor));
         }
-        public virtual void Exit(Actor actor){}
+        public virtual void Exit(Actor actor)
+        {
+            //  TODO aherrera : DUMMY! HE'S GOT A KNIFE.
+            var dummySubject = new SubjectData();
+
+            foreach(var result in Results)
+            {
+                result.Apply(ref actor.Data, ref dummySubject);
+            }
+        }
         public virtual bool Perform(Actor actor)
         {
             return true;

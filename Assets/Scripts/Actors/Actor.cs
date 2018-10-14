@@ -36,8 +36,10 @@ namespace GOAP
             var topAction = _actions.Peek();
             if(topAction != _currentAction)
             {
+                Debug.Log("New action to do : " + topAction.name);
                 if(topAction.Enter(this) == false)
                 {
+                    Debug.Log("Can't do topAction : " + topAction.name);
                     PlanActions();
                 }
                 _currentAction = topAction;
@@ -46,12 +48,14 @@ namespace GOAP
             {
                 if(_currentAction.Perform(this) == false)
                 {
+                    Debug.Log("Failed performance of action : " + _currentAction.name);
                     PlanActions();
                 }
             }
 
             if(_currentAction.IsComplete())
             {
+                Debug.Log("I did it -- " + _currentAction.name);
                 _currentAction.Exit(this);
                 _currentAction = null;
                 _actions.Pop();

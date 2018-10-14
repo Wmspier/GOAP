@@ -11,6 +11,19 @@ namespace GOAP
             public float RunningCost;
             public SubjectData RunningData;
             public BaseAction Action;
+
+            public PlannerNode()
+            {
+
+            }
+
+            public PlannerNode(PlannerNode copyOf)
+            {
+                Parent = copyOf.Parent;
+                RunningCost = copyOf.RunningCost;
+                RunningData = copyOf.RunningData;
+                Action = copyOf.Action;
+            }
         }
 
         public static Stack<BaseAction> ConstructActionPlan(Actor actor, Goal goal, List<BaseAction> performableActions)
@@ -82,17 +95,19 @@ namespace GOAP
         private static bool BuildGraph(PlannerNode parent, List<PlannerNode> graphRef, Goal goal, List<BaseAction> performableActions)
         {
             bool planFound = false;
-
+            
             foreach(var action in performableActions)
             {
-                if(IsConditionsMet(action.Conditions, parent.RunningData))
+                PlannerNode actualBatman = new PlannerNode(parent);
+
+                if (IsConditionsMet(action.Conditions, actualBatman.RunningData))
                 {
                     //  Apply the results of the action as if completed successfully.
-                    SubjectData resultantData = CopyActionResults(parent.RunningData, action.Results);
+                    SubjectData resultantData = CopyActionResults(actualBatman.RunningData, action.Results);
                     PlannerNode node = new PlannerNode()
                     {
-                        Parent = parent,
-                        RunningCost = parent.RunningCost + (int)action.Difficulty,
+                        Parent = actualBatman,
+                        RunningCost = actualBatman.RunningCost + (int)action.Difficulty,
                         RunningData = resultantData,
                         Action = action
                     };
@@ -123,14 +138,11 @@ namespace GOAP
         /// <returns></returns>
         private static bool IsConditionsMet(List<BaseCondition> toTest, SubjectData currentData)
         {
-            bool allMet = true;
+            bool allMet = true;// toTest.Count > 0;
 
             foreach(var condition in toTest)
             {
-                if (!condition.IsMet(currentData))
-                {
-                    allMet = false;
-                }
+                allMet &= condition.IsMet(currentData);
             }
 
             return allMet;
@@ -146,8 +158,8 @@ namespace GOAP
         {
             var newData = new SubjectData()
             {
-                Resources = runningData.Resources,
-                States = runningData.States
+                Resources = new Dictionary<string, float>(runningData.Resources),
+                States = new List<State>(runningData.States)
             };
 
             var subjectDummyData = new SubjectData();
